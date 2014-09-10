@@ -13,6 +13,7 @@ import me.lewei.logic.WriteService;
 import me.lewei.obj.WriteContext;
 import me.lewei.util.CommonExcelUtil;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -57,6 +58,17 @@ public class WriteServiceImpl implements WriteService {
 			
 			File orgFile = new File(wc.getOrgFullPath());
 			File newFile = new File(wc.getNewFullPath());
+			
+			if(!newFile.getPath().equals(orgFile.getPath())) {
+				log.info("[ processRenameFiles ] No change for file: " + orgFile.getPath());
+				continue;
+			}
+			
+			if(StringUtils.isEmpty(wc.getToName())){
+				log.info("[ processRenameFiles ] New file name is empty so delete org file" + orgFile.getPath());
+				orgFile.delete();
+			}
+			
 			orgFile.renameTo(newFile);
 			
 		}
@@ -80,11 +92,17 @@ public class WriteServiceImpl implements WriteService {
 			File orgFile = new File(wc.getOrgFullPath());
 			File newFile = new File(wc.getNewFullPath());
 
+			if(StringUtils.isEmpty(wc.getNewFullPath())){
+				continue;
+			}
+			
 			if(!orgFile.exists()) {
 				throw new Exception("[ processRenameFiles ] Sources file is not exist: " + orgFile.getPath());
 			}
-			if (newFile.exists()) {
-				throw new Exception("[ processRenameFiles ] Target file is already exist: " + newFile.getPath());
+			if(!newFile.getPath().equals(orgFile.getPath())) {
+				if (newFile.exists()) {
+					throw new Exception("[ processRenameFiles ] Target file is already exist: " + newFile.getPath());
+				}
 			}
 			
 		}
