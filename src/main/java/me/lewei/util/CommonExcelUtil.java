@@ -75,9 +75,9 @@ public class CommonExcelUtil {
 
 	private List<String> getColumnContex(File f, int i) {
 		String seq = "" + (i + 1);
-		String prefix = "'";
+		String prefix = "";
 		String fullName = f.getName();
-		String space = "'";
+		String space = "";
 		String suffix = fullName.substring(fullName
 				.lastIndexOf(ProcerConstants.SYMBOL.DOT));
 		String midName = fullName.replace(suffix, "");

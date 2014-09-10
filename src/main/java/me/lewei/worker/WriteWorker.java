@@ -19,11 +19,11 @@ public class WriteWorker extends BaseWorker {
 		this.jobContext = this.getJobContext();
 		
 		String inputPath = jobContext.getPath();
-		inputPath = inputPath.replaceAll("/", "\\");
-		if (!inputPath.endsWith("\\")) {
-			inputPath = inputPath + "\\";
+//		inputPath = inputPath.replaceAll("/", "\\");
+		if (!inputPath.endsWith("/")) {
+			inputPath = inputPath + "/";
 		}
-		
+
 		Map<String, WriteContext> fileMap = writeService.readNameListFromExcel(inputPath);
 		
 		writeService.validateRenameFiles(fileMap);

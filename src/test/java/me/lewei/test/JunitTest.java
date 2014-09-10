@@ -50,12 +50,12 @@ public class JunitTest {
 
 	@Test
 	public void testReadFromFile() {
-		BaseJobStart.test(new String[] { "-r", "C:\\Users\\helewei\\Desktop\\properties.prod_5\\LC" });
+		BaseJobStart.test(new String[] { "-r", "/Users/lahm/Desktop/testf" });
 	}
 	
 	@Test
 	public void testWriteToRename() {
-		BaseJobStart.test(new String[] { "-w", "C:\\Users\\helewei\\Desktop\\properties.prod_5\\LC" });
+		BaseJobStart.test(new String[] { "-w", "/Users/lahm/Desktop/testf" });
 	}
 
 	public WriteService getWriteServiceImpl() {

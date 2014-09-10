@@ -20,9 +20,9 @@ public class ReadWorker extends BaseWorker {
 		this.jobContext = this.getJobContext();
 		
 		String inputPath = jobContext.getPath();
-		inputPath = inputPath.replaceAll("/", "\\");
-		if (!inputPath.endsWith("\\")) {
-			inputPath = inputPath + "\\";
+//		inputPath = inputPath.replaceAll("/", "\\");
+		if (!inputPath.endsWith("/")) {
+			inputPath = inputPath + "/";
 		}
 
 		ReadContext rc = new ReadContext();
