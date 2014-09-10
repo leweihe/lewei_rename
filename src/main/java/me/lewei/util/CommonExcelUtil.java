@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +14,11 @@ import me.lewei.obj.ReadContext;
 import me.lewei.obj.WriteContext;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
 
 public class CommonExcelUtil {
 	private POIFSFileSystem fs;
@@ -132,43 +129,18 @@ public class CommonExcelUtil {
 
 			for (int j = 0; j < columns.size(); j++) {
 				HSSFCell cell = row.createCell(j);
-				cell.setCellValue(columns.get(j));
 
 				if (j == toColumn) {
 					cell.setCellFormula(columns.get(j));
+				} else {
+					cell.setCellType(Cell.CELL_TYPE_STRING); 
+					cell.setCellValue(columns.get(j));
 				}
 			}
 		}
 		FileOutputStream fout = new FileOutputStream(readContex.getInputPath()
 				+ ProcerConstants.WORKING_FILE_NAME);
 		wb.write(fout);
-		fout.close();
-	}
-
-	public void readFromExcel(WriteContext writeContex) throws Exception {
-//		List<Map<String, File>> dateList = writeContex.getFileMaps();
-		HSSFWorkbook wb = new HSSFWorkbook();
-		HSSFSheet sheet = wb.createSheet();
-		HSSFCellStyle style = wb.createCellStyle();
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-		style.setBorderBottom(HSSFCellStyle.BORDER_MEDIUM);
-		style.setBorderTop(HSSFCellStyle.BORDER_MEDIUM);
-		style.setBorderLeft(HSSFCellStyle.BORDER_MEDIUM);
-		style.setBorderRight(HSSFCellStyle.BORDER_MEDIUM);
-
-		// for (int i = 0; i < dateList.size(); i++) {
-		// HSSFRow row = sheet.createRow(i);
-		// List<String> list = dateList.get(i);
-		// for (int j = 0; j < dateList.size(); j++) {
-		// HSSFCell cell = row.createCell(j);
-		// cell.setCellValue(dateList.get(j));
-		// cell.setCellStyle(style);
-		// }
-		// }
-
-		String filePath = writeContex.getTargetPath();
-		FileOutputStream fout = new FileOutputStream(filePath);
-		fout.write(wb.getBytes());
 		fout.close();
 	}
 

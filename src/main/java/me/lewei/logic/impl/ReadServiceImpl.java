@@ -38,8 +38,8 @@ public class ReadServiceImpl implements ReadService {
 	public void pasteNameListToExcel(ReadContext rc) throws Exception {
 		CommonExcelUtil ceu = new CommonExcelUtil();
 		ceu.setFromColumn(1);//TODO should get from some properties files
-		ceu.setToColumn(6);//TODO should get from some properties files
-		ceu.setPathColumn(7);//TODO should get from some properties files
+		ceu.setToColumn(6);
+		ceu.setPathColumn(7);
 		ceu.creatExcel4ReadedFile(rc);
 	}
 

@@ -27,8 +27,8 @@ public class WriteServiceImpl implements WriteService {
 			CommonExcelUtil ceu = new CommonExcelUtil();
 
 			ceu.setFromColumn(1);// TODO should get from some properties files
-			ceu.setToColumn(6);// TODO should get from some properties files
-			ceu.setPathColumn(7);// TODO should get from some properties files
+			ceu.setToColumn(6);
+			ceu.setPathColumn(7);
 
 			InputStream is = new FileInputStream(path + ProcerConstants.WORKING_FILE_NAME);
 			fileMap = ceu.readExcelFileMaps(is);
