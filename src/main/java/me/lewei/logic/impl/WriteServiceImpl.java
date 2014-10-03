@@ -59,7 +59,7 @@ public class WriteServiceImpl implements WriteService {
 			File orgFile = new File(wc.getOrgFullPath());
 			File newFile = new File(wc.getNewFullPath());
 			
-			if(!newFile.getPath().equals(orgFile.getPath())) {
+			if(newFile.getPath().equals(orgFile.getPath())) {
 				log.info("[ processRenameFiles ] No change for file: " + orgFile.getPath());
 				continue;
 			}
